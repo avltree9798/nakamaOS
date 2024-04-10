@@ -20,7 +20,8 @@ build:
 	$(GCC) -D$(TARGET) $(CFLAGS) -o out/stdlib.o -c lib/stdlib.S
 	$(GCC) -D$(TARGET) $(CFLAGS) -o out/main.o -c main.c
 	$(GCC) -D$(TARGET) $(CFLAGS) -o out/uart.o -c lib/uart.c
-	$(LD) $(LDFLAGS) -T link.lds -o out/kernel out/boot.o out/main.o out/stdlib.o out/uart.o
+	$(GCC) -D$(TARGET) $(CFLAGS) -o out/stdio.o -c lib/stdio.c
+	$(LD) $(LDFLAGS) -T link.lds -o out/kernel out/boot.o out/main.o out/stdlib.o out/uart.o out/stdio.o
 	$(OBJCOPY) -O binary out/kernel build/kernel.bin
 
 # Test build target
@@ -31,7 +32,8 @@ test_build:
 	$(GCC) -DRUN_TESTS -D$(TARGET) $(CFLAGS) -o out/stdlib.o -c lib/stdlib.S
 	$(GCC) -DRUN_TESTS -D$(TARGET) $(CFLAGS) -o out/main.o -c main.c
 	$(GCC) -DRUN_TESTS -D$(TARGET) $(CFLAGS) -o out/uart.o -c lib/uart.c
-	$(LD) $(LDFLAGS) -T link.lds -o out/kernel out/boot.o out/main.o out/stdlib.o out/uart.o 
+	$(GCC) -D$(TARGET) $(CFLAGS) -o out/stdio.o -c lib/stdio.c
+	$(LD) $(LDFLAGS) -T link.lds -o out/kernel out/boot.o out/main.o out/stdlib.o out/uart.o out/stdio.o
 	$(OBJCOPY) -O binary out/kernel build/kernel8_test.img
 
 run:

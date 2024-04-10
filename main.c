@@ -1,4 +1,4 @@
-#include "include/uart.h"
+#include "include/stdio.h"
 
 int kernel_main()
 {
@@ -6,8 +6,12 @@ int kernel_main()
     // Run tests
     return 0;
 #endif
-    init_uart();
-    write_string("Hello, world!\n");
+    // init_uart();
+    uint64_t value = 0x1234567890ABCDEF;
+    printk("Hello, %s\n", "world!");
+    printk("1-2=%d\n", -1);
+    printk("Test number %d\r\n", value);
+    printk("Test number %x\r\n", value);
     while (1) {
         continue;
     }
